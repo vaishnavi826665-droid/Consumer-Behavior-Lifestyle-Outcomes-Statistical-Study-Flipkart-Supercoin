@@ -26,13 +26,6 @@ Key Results
 
 MetricResultReduction in executive decision-making time~25% (paired t-test, p < 0.001)Lift in platform engagement post-roadmap~18% (paired t-test, p < 0.001)Lifestyle segment recovery from behavior aloneAdjusted Rand Index well above 0 (K-Means)
 
-Engagement Lift by User Segment
-
-Show Image
-
-Executive Decision-Making Time
-
-Show Image
 
 Methodology
 
