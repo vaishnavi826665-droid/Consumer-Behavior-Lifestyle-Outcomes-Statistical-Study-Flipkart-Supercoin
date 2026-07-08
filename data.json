@@ -1,0 +1,93 @@
+{
+  "kpis": {
+    "total_users": 4000,
+    "avg_engagement_before": 13.49,
+    "avg_engagement_after": 15.99,
+    "engagement_lift_pct": 18.537186811622973,
+    "avg_manual_hours": 6.14,
+    "avg_dashboard_hours": 4.61,
+    "decision_time_reduction_pct": 24.978344479473325
+  },
+  "engagement_by_archetype": {
+    "labels": [
+      "Deal Hunter",
+      "Convenience Seeker",
+      "Wellness Focused",
+      "Tech Enthusiast"
+    ],
+    "before": [
+      14.38,
+      15.36,
+      9.0,
+      14.4
+    ],
+    "after": [
+      17.84,
+      18.44,
+      9.9,
+      16.25
+    ]
+  },
+  "redemption_breakdown": {
+    "labels": [
+      "Discount Vouchers",
+      "Groceries",
+      "Electronics",
+      "Streaming",
+      "Fitness",
+      "Food Delivery"
+    ],
+    "values": [
+      25.2,
+      17.4,
+      17.0,
+      15.6,
+      12.9,
+      12.0
+    ]
+  },
+  "archetype_distribution": {
+    "labels": [
+      "Deal Hunter",
+      "Convenience Seeker",
+      "Wellness Focused",
+      "Tech Enthusiast"
+    ],
+    "values": [
+      1363,
+      991,
+      844,
+      802
+    ]
+  },
+  "monthly_trend": {
+    "weeks": [
+      "Wk 1",
+      "Wk 2",
+      "Wk 3",
+      "Wk 4 (Roadmap Launch)",
+      "Wk 5",
+      "Wk 6",
+      "Wk 7",
+      "Wk 8",
+      "Wk 9",
+      "Wk 10",
+      "Wk 11",
+      "Wk 12"
+    ],
+    "engagement": [
+      13.76,
+      13.56,
+      13.5,
+      13.21,
+      13.45,
+      13.44,
+      13.48,
+      13.9,
+      14.48,
+      14.92,
+      15.29,
+      16.12
+    ]
+  }
+}

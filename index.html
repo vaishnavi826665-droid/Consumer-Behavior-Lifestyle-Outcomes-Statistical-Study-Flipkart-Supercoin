@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SuperCoin Rewards — Engagement Monitoring Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#F5F7FA;
+    --card:#FFFFFF;
+    --ink:#1B2430;
+    --sub:#6B7686;
+    --line:#E4E8EE;
+    --accent:#2C5F8A;
+    --accent-2:#F2A65A;
+    --good:#2E9E6D;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Segoe UI', Inter, -apple-system, system-ui, sans-serif;
+  }
+  header{
+    padding:28px 36px 20px;
+    border-bottom:1px solid var(--line);
+    background:var(--card);
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  header h1{
+    margin:0 0 4px;
+    font-size:22px;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  header p{
+    margin:0;
+    color:var(--sub);
+    font-size:13.5px;
+  }
+  .badge{
+    background:#EAF1F7;
+    color:var(--accent);
+    font-size:12px;
+    font-weight:600;
+    padding:6px 12px;
+    border-radius:20px;
+    white-space:nowrap;
+  }
+  main{
+    max-width:1200px;
+    margin:0 auto;
+    padding:28px 24px 60px;
+  }
+  .kpi-row{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));
+    gap:16px;
+    margin-bottom:24px;
+  }
+  .kpi{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px 20px;
+  }
+  .kpi .label{
+    font-size:12.5px;
+    color:var(--sub);
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  .kpi .value{
+    font-size:30px;
+    font-weight:700;
+    margin-top:6px;
+    color:var(--ink);
+  }
+  .kpi .delta{
+    font-size:12.5px;
+    font-weight:600;
+    margin-top:4px;
+  }
+  .delta.up{color:var(--good);}
+  .grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:16px;
+    margin-bottom:16px;
+  }
+  .grid3{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  .panel{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:20px;
+  }
+  .panel h2{
+    margin:0 0 2px;
+    font-size:15px;
+    font-weight:700;
+  }
+  .panel .sub{
+    margin:0 0 14px;
+    font-size:12.5px;
+    color:var(--sub);
+  }
+  canvas{max-width:100%;}
+  footer{
+    text-align:center;
+    color:var(--sub);
+    font-size:12px;
+    padding:20px;
+  }
+  @media (max-width:800px){
+    .grid, .grid3{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>SuperCoin Rewards — Engagement Monitoring</h1>
+    <p>Executive dashboard · Jan – Apr 2026 · Simulated data</p>
+  </div>
+  <span class="badge">Synthetic demo data</span>
+</header>
+
+<main>
+
+  <div class="kpi-row" id="kpiRow"></div>
+
+  <div class="grid">
+    <div class="panel">
+      <h2>Engagement Trend</h2>
+      <p class="sub">Weekly engagement score, roadmap rollout in Week 4</p>
+      <canvas id="trendChart" height="140"></canvas>
+    </div>
+    <div class="panel">
+      <h2>User Segments</h2>
+      <p class="sub">Behavior-derived lifestyle archetype distribution</p>
+      <canvas id="archChart" height="140"></canvas>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div class="panel">
+      <h2>Engagement Lift by Segment</h2>
+      <p class="sub">Before vs. after growth roadmap rollout</p>
+      <canvas id="liftChart" height="150"></canvas>
+    </div>
+    <div class="panel">
+      <h2>SuperCoin Redemption Mix</h2>
+      <p class="sub">Share of redemptions by category</p>
+      <canvas id="redemptionChart" height="150"></canvas>
+    </div>
+  </div>
+
+</main>
+
+<footer>Built with Chart.js · Data is synthetically generated for demonstration purposes</footer>
+
+<script>
+const data = {"kpis": {"total_users": 4000, "avg_engagement_before": 13.49, "avg_engagement_after": 15.99, "engagement_lift_pct": 18.537186811622973, "avg_manual_hours": 6.14, "avg_dashboard_hours": 4.61, "decision_time_reduction_pct": 24.978344479473325}, "engagement_by_archetype": {"labels": ["Deal Hunter", "Convenience Seeker", "Wellness Focused", "Tech Enthusiast"], "before": [14.38, 15.36, 9.0, 14.4], "after": [17.84, 18.44, 9.9, 16.25]}, "redemption_breakdown": {"labels": ["Discount Vouchers", "Groceries", "Electronics", "Streaming", "Fitness", "Food Delivery"], "values": [25.2, 17.4, 17.0, 15.6, 12.9, 12.0]}, "archetype_distribution": {"labels": ["Deal Hunter", "Convenience Seeker", "Wellness Focused", "Tech Enthusiast"], "values": [1363, 991, 844, 802]}, "monthly_trend": {"weeks": ["Wk 1", "Wk 2", "Wk 3", "Wk 4 (Roadmap Launch)", "Wk 5", "Wk 6", "Wk 7", "Wk 8", "Wk 9", "Wk 10", "Wk 11", "Wk 12"], "engagement": [13.76, 13.56, 13.5, 13.21, 13.45, 13.44, 13.48, 13.9, 14.48, 14.92, 15.29, 16.12]}};
+
+const fmt1 = n => Math.round(n*10)/10;
+
+const kpis = data.kpis;
+const kpiRow = document.getElementById("kpiRow");
+const kpiDefs = [
+  {label:"Total Users", value: kpis.total_users.toLocaleString(), delta:null},
+  {label:"Avg. Engagement (After)", value: kpis.avg_engagement_after, delta:`+${fmt1(kpis.engagement_lift_pct)}% vs. before`},
+  {label:"Exec Decision Time (After)", value: `${kpis.avg_dashboard_hours} hrs`, delta:`-${fmt1(kpis.decision_time_reduction_pct)}% vs. manual`},
+  {label:"Manual Reporting Time", value: `${kpis.avg_manual_hours} hrs`, delta:null},
+];
+kpiDefs.forEach(k => {
+  const div = document.createElement("div");
+  div.className = "kpi";
+  div.innerHTML = `<div class="label">${k.label}</div><div class="value">${k.value}</div>${k.delta ? `<div class="delta up">${k.delta}</div>` : ""}`;
+  kpiRow.appendChild(div);
+});
+
+const palette = {
+  accent: "#2C5F8A",
+  accent2: "#F2A65A",
+  grid: "#E4E8EE",
+  ink: "#1B2430",
+  sub: "#6B7686"
+};
+Chart.defaults.font.family = "Segoe UI, Inter, sans-serif";
+Chart.defaults.color = palette.sub;
+
+new Chart(document.getElementById("trendChart"), {
+  type: "line",
+  data: {
+    labels: data.monthly_trend.weeks,
+    datasets: [{
+      label: "Engagement Score",
+      data: data.monthly_trend.engagement,
+      borderColor: palette.accent,
+      backgroundColor: "rgba(44,95,138,0.08)",
+      fill: true,
+      tension: 0.35,
+      pointRadius: 3,
+    }]
+  },
+  options: {
+    plugins: { legend: { display:false } },
+    scales: { y: { grid:{color:palette.grid} }, x: { grid:{display:false} } }
+  }
+});
+
+new Chart(document.getElementById("archChart"), {
+  type: "doughnut",
+  data: {
+    labels: data.archetype_distribution.labels,
+    datasets: [{
+      data: data.archetype_distribution.values,
+      backgroundColor: ["#2C5F8A", "#4C8FBF", "#F2A65A", "#9BB6C9"],
+      borderWidth: 0
+    }]
+  },
+  options: { plugins: { legend: { position:"bottom", labels:{boxWidth:10, padding:14} } } }
+});
+
+new Chart(document.getElementById("liftChart"), {
+  type: "bar",
+  data: {
+    labels: data.engagement_by_archetype.labels,
+    datasets: [
+      { label:"Before", data: data.engagement_by_archetype.before, backgroundColor:"#B9C4CF" },
+      { label:"After", data: data.engagement_by_archetype.after, backgroundColor: palette.accent }
+    ]
+  },
+  options: {
+    plugins: { legend: { position:"top", align:"end" } },
+    scales: { y: { grid:{color:palette.grid} }, x: { grid:{display:false} } }
+  }
+});
+
+new Chart(document.getElementById("redemptionChart"), {
+  type: "bar",
+  data: {
+    labels: data.redemption_breakdown.labels,
+    datasets: [{
+      data: data.redemption_breakdown.values,
+      backgroundColor: palette.accent2
+    }]
+  },
+  options: {
+    indexAxis: "y",
+    plugins: { legend: { display:false } },
+    scales: { x: { grid:{color:palette.grid}, ticks:{callback:v=>v+"%"} }, y: { grid:{display:false} } }
+  }
+});
+</script>
+
+</body>
+</html>
