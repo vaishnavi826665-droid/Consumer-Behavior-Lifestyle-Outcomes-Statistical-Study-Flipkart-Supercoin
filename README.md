@@ -24,7 +24,7 @@ from nothing but their reward-earning and redemption behavior, using unsupervise
 
 Key Results
 
-MetricResultReduction in executive decision-making time~25% (paired t-test, p < 0.001)Lift in platform engagement post-roadmap~18% (paired t-test, p < 0.001)Lifestyle segment recovery from behavior aloneAdjusted Rand Index well above 0 (K-Means)
+MetricResultReduction in executive decision-making time~25% ;~18% (paired t-test, p < 0.001)Lifestyle segment recovery from behavior aloneAdjusted Rand Index well above 0 (K-Means)
 
 
 Methodology
